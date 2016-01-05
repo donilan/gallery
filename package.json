@@ -1,0 +1,30 @@
+{
+  "name": "gallery",
+  "version": "0.1.0",
+  "description": "Gallery",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donilan/gallery.git"
+  },
+  "keywords": [
+    "Gallery"
+  ],
+  "author": "Doni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/donilan/gallery/issues"
+  },
+  "homepage": "https://github.com/donilan/gallery#readme",
+  "dependencies": {
+    "react": "^0.14.5",
+    "react-photo-gallery": "neptunian/react-photo-gallery",
+    "webpack": "^1.12.9"
+  }
+}
