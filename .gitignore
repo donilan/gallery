@@ -36,3 +36,5 @@ bower.json
 public/images
 node_modules/
 /public/app.js
+public/javascripts
+public/cache
