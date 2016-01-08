@@ -38,3 +38,5 @@ node_modules/
 /public/app.js
 public/javascripts
 public/cache
+/config/deploy.rb
+/deploy.sh
