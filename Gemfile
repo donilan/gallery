@@ -47,6 +47,5 @@ group :development do
   gem 'foreman'
 end
 
-gem 'react-rails', '~> 1.5.0'
 gem "mini_magick"
 gem 'wechat'
