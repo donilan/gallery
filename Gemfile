@@ -49,3 +49,4 @@ end
 
 gem "mini_magick"
 gem 'wechat'
+gem 'config'
