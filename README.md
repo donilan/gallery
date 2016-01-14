@@ -27,3 +27,8 @@ Startup server, the command below will startup the rails server and compile jsx 
 ```bash
 foreman start
 ```
+
+TODOs
+
+- Cache the images result, maybe just 3 seconds
+- React transaction for new image which load from auto update
