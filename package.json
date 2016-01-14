@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "clean": "rm -rf public/javascript",
+    "clean": "rm -rf public/javascripts",
     "build": "npm run clean && webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
