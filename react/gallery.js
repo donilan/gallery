@@ -24,11 +24,17 @@ module.exports = React.createClass({
       loadSize: 0
     };
   },
+  loop: function() {
+    setTimeout(function(){
+      $.get('/images', function(images){
+        this.setState({photos: images});
+      }.bind(this));
+      this.loop();
+    }.bind(this), 3000);
+  },
   componentWillMount: function() {
     window.addEventListener('scroll', this.handleScroll);
-    $.get('/images', function(images){
-      this.setState({photos: images});
-    }.bind(this));
+    this.loop();
   },
   calcState: function(containerWidth) {
     if (containerWidth >= 1024){
