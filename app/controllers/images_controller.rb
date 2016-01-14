@@ -6,7 +6,7 @@ class ImagesController < ApplicationController
     if !File.exist?(CACHE_PATH)
       FileUtils.mkdir_p(CACHE_PATH)
     end
-    images = Dir[IMAGE_PATH.join('*').to_s].map do |path|
+    images = Dir[IMAGE_PATH.join('*').to_s].sort_by{ |f| File.mtime(f) }.reverse.map do |path|
       name = File.basename path
       cache_path = CACHE_PATH.join(name).to_s
       if !File.exist?(cache_path)
