@@ -8,6 +8,6 @@ require("./styles/app.scss");
 
 var container = document.getElementById('outlet');
 /* ReactDOM.render(<Loading />, container); */
-require(['./gallery'], function(Gallery){
-  ReactDOM.render(<Gallery />, container);
+require(['./app'], function(App){
+  ReactDOM.render(<App />, container);
 })

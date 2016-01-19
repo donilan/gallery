@@ -33,7 +33,7 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
-public/images
+public/medias
 node_modules/
 /public/app.js
 public/javascripts

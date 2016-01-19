@@ -1,14 +1,13 @@
-class ImagesController < ApplicationController
-  CACHE_PATH = Rails.public_path.join('cache', 'images')
-  IMAGE_PATH = Rails.public_path.join('images')
+class MediasController < ApplicationController
+  include MediasHelper
   THUMB_WIDTH = 400
   def index
-    if !File.exist?(CACHE_PATH)
-      FileUtils.mkdir_p(CACHE_PATH)
+    if !File.exist?(media_cache_path)
+      FileUtils.mkdir_p(media_cache_path)
     end
-    images = Dir[IMAGE_PATH.join('*').to_s].sort_by{ |f| File.mtime(f) }.reverse.map do |path|
+    images = Dir[media_path.join('*').to_s].sort_by{ |f| File.mtime(f) }.reverse.map do |path|
       name = File.basename path
-      cache_path = CACHE_PATH.join(name).to_s
+      cache_path = media_cache_path.join(name).to_s
       if !File.exist?(cache_path)
         image = MiniMagick::Image.open(path)
         width = image.width
@@ -20,12 +19,12 @@ class ImagesController < ApplicationController
       end
       meta = MiniMagick::Image.open(cache_path)
       {
-        src: URI.join(request.original_url, '/cache/images/', name).to_s,
+        src: media_cache_uri(name),
         width: meta.width,
         height: meta.height,
         aspectRatio: (1.0 * meta.width / meta.height).round(2),
         lightboxImage: {
-          src: URI.join(request.original_url, '/images/', name).to_s,
+          src: media_uri(name),
         }
       }
     end
