@@ -7,7 +7,7 @@ import Gallery from './gallery';
 import Loading from './loading';
 import _ from 'lodash';
 
-const FONT_COLORS = _.range(0, 10, 3).map(function(i){
+const FONT_COLORS = _.range(0, 10, 2).map(function(i){
   return `#${i}${i}${i}`;
 });
 
@@ -43,7 +43,7 @@ module.exports = React.createClass({
   },
   calcState: function(containerWidth) {
     if (containerWidth >= 1024){
-      return {loadSize: 3, containerWidth: containerWidth, maxPhotos: 9, fontSize: '30px'};
+      return {loadSize: 3, containerWidth: containerWidth, maxPhotos: 9, fontSize: '35px'};
     } else if (containerWidth >= 480){
       return {loadSize: 2, containerWidth: containerWidth, maxPhotos: 6, fontSize: '20px'};
     } else {
@@ -64,7 +64,7 @@ module.exports = React.createClass({
     }
   },
   handleScroll: function(e) {
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 50)) {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 120)) {
       this.loadMorePhotos();
     }
   },
@@ -85,9 +85,9 @@ module.exports = React.createClass({
     return texts.map(function(txt, i){
       var color = FONT_COLORS[i] || '#999';
       return (
-        <div key={i} style={{fontSize: this.state.fontSize, color: color}}>
+        <p key={i} style={{fontSize: this.state.fontSize, color: color}}>
           &nbsp;&nbsp;&nbsp;&nbsp; >> {txt.text}
-        </div>
+        </p>
       );
     }.bind(this));
   },
