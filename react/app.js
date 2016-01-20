@@ -1,3 +1,4 @@
+require('./app.scss');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
@@ -5,6 +6,10 @@ import Lightbox from 'react-images';
 import Gallery from './gallery';
 import Loading from './loading';
 import _ from 'lodash';
+
+const FONT_COLORS = _.range(0, 10, 3).map(function(i){
+  return `#${i}${i}${i}`;
+});
 
 const lightboxStyles  = Lightbox.extendStyles({
   backdrop: {
@@ -38,11 +43,11 @@ module.exports = React.createClass({
   },
   calcState: function(containerWidth) {
     if (containerWidth >= 1024){
-      return {loadSize: 3, containerWidth: containerWidth, maxPhotos: 9};
+      return {loadSize: 3, containerWidth: containerWidth, maxPhotos: 9, fontSize: '30px'};
     } else if (containerWidth >= 480){
-      return {loadSize: 2, containerWidth: containerWidth, maxPhotos: 6};
+      return {loadSize: 2, containerWidth: containerWidth, maxPhotos: 6, fontSize: '20px'};
     } else {
-      return {loadSize: 1, containerWidth: containerWidth, maxPhotos: 2};
+      return {loadSize: 1, containerWidth: containerWidth, maxPhotos: 3, fontSize: '14px'};
     }
   },
   componentDidMount: function(){
@@ -68,13 +73,33 @@ module.exports = React.createClass({
       this.setState({maxPhotos: this.state.maxPhotos + this.state.loadSize});
     }
   },
+  getPhotos: function() {
+    var photos = _.filter(this.state.photos, {type: 'image'});
+    return _.take(photos, this.state.maxPhotos);
+  },
+  renderTexts: function() {
+    var texts = _.filter(this.state.photos, {type: 'text'});
+    if(texts.length < 1) {
+      return null;
+    }
+    return texts.map(function(txt, i){
+      var color = FONT_COLORS[i] || '#999';
+      return (
+        <div key={i} style={{fontSize: this.state.fontSize, color: color}}>
+          &nbsp;&nbsp;&nbsp;&nbsp; >> {txt.text}
+        </div>
+      );
+    }.bind(this));
+  },
   render: function() {
     if(!this.state.photos) {
       return <Loading />;
     }
+    
     return (
       <div>
-        <Gallery photos={_.take(this.state.photos, this.state.maxPhotos)} lightboxStyles={lightboxStyles} />
+        <Gallery photos={this.getPhotos()} lightboxStyles={lightboxStyles} />
+        <div className="forum" >{this.renderTexts()}</div>
       </div>
     );
   }

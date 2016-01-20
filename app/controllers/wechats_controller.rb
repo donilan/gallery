@@ -1,6 +1,3 @@
-require 'digest'
-require 'open-uri'
-
 class WechatsController < ApplicationController
   include MediasHelper
   protect_from_forgery except: :create
@@ -15,7 +12,8 @@ class WechatsController < ApplicationController
 
   on :image do |request|
     uri = URI(request[:PicUrl])
-    request.reply.text download_image(uri)
+    dest_file_name = "#{Digest::SHA256.hexdigest(uri)}.jpg"
+    request.reply.text download_image(uri, dest_file_name)
   end
 
   on :event, with: 'subscribe' do |request|

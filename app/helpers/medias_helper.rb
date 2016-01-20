@@ -1,3 +1,6 @@
+require 'digest'
+require 'open-uri'
+
 module MediasHelper
   def media_path
     Rails.public_path.join('medias')
@@ -12,9 +15,8 @@ module MediasHelper
     URI.join(request.original_url, '/images/', name).to_s
   end
 
-  def download_image(uri)
-    logger.info("User uploading photo #{request[:PicUrl]}")
-    dest_file_name = "#{request[:MediaId]}.jpg"
+  def download_image(uri, dest_file_name)
+    logger.info("User uploading photo #{uri}")
     dest = media_path.join(dest_file_name).to_s
     if File.exist? dest
       logger.info("Photo already exists.")
