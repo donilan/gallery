@@ -12,7 +12,7 @@ module MediasHelper
     URI.join(request.original_url, '/cache/medias/', name).to_s
   end
   def media_uri(name)
-    URI.join(request.original_url, '/images/', name).to_s
+    URI.join(request.original_url, '/medias/', name).to_s
   end
 
   def download_image(uri, dest_file_name)
