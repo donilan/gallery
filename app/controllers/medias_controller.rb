@@ -22,8 +22,7 @@ class MediasController < ApplicationController
   end
 
   def text
-    store_text(params[:text])
-    render text: 'success'
+    render text: receive_text(params[:text])
   end
 
   protected

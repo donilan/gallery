@@ -7,7 +7,9 @@ class WechatsController < ApplicationController
   on :text do |request, content|
     # user = wechat.user(request[:FromUserName])
     # user['nickname']
-    store_text("#{request[:FromUserName]}: #{content}")
+    # store_text("#{request[:FromUserName]}: #{content}")
+    reply = receive_text(content, request[:FromUserName])
+    request.reply.text reply unless reply.nil?
   end
 
   on :image do |request|

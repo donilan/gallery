@@ -43,7 +43,7 @@ module.exports = React.createClass({
   },
   calcState: function(containerWidth) {
     if (containerWidth >= 1024){
-      return {loadSize: 3, containerWidth: containerWidth, maxPhotos: 9, fontSize: '35px'};
+      return {loadSize: 3, containerWidth: containerWidth, maxPhotos: 12, fontSize: '35px'};
     } else if (containerWidth >= 480){
       return {loadSize: 2, containerWidth: containerWidth, maxPhotos: 6, fontSize: '20px'};
     } else {
@@ -86,7 +86,7 @@ module.exports = React.createClass({
       var color = FONT_COLORS[i] || '#999';
       return (
         <p key={i} style={{fontSize: this.state.fontSize, color: color}}>
-          &nbsp;&nbsp;&nbsp;&nbsp; >> {txt.text}
+          &nbsp;&nbsp; > {txt.text}
         </p>
       );
     }.bind(this));

@@ -1,3 +1,7 @@
 thanks_for_share: 'Thanks for share your photo.'
 welcome_message: 'Welcome.'
 image_already_exists: 'The photo you are sharing was existed.'
+i_am: 'I am'
+who_are_you: 'Please tell me who you are if you want to show your name with your message, you can type "I am Doni" to tell me'
+anonymous: 'Anonymons'
+got_your_name: 'Thank you, I got your name already.'

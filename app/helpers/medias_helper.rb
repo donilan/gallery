@@ -29,6 +29,30 @@ module MediasHelper
     end
   end
 
+  def names_path
+    path = Rails.root.join('db', 'names')
+    FileUtils.mkdir_p path unless File.exist? path
+    path
+  end
+
+  def receive_text(text, who='test')
+    text = text.nil? ? '' : text.strip
+    return if text.blank?
+    if /^#{Settings.i_am}/i =~ text
+      name = text.sub(/^#{Settings.i_am}\s*/i, '')
+      File.write names_path.join(who), name
+      Settings.got_your_name
+    else
+      name = if File.exist? names_path.join(who)
+               File.read names_path.join(who)
+             else
+               Settings.anonymous
+             end
+      store_text "#{name}: #{text}"
+      return
+    end
+  end
+
   def store_text(content)
     dest_file_name = "#{Digest::SHA256.hexdigest(content)}.txt"
     dest = media_path.join(dest_file_name).to_s
