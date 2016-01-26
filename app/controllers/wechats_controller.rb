@@ -14,7 +14,8 @@ class WechatsController < ApplicationController
 
   on :image do |request|
     uri = URI(request[:PicUrl])
-    dest_file_name = "#{Digest::SHA256.hexdigest(uri)}.jpg"
+    dest_file_name = "#{Digest::SHA256.hexdigest(uri.to_s)}.jpg"
+    logger.info("Saving file from #{uri.to_s} to #{dest_file_name}")
     request.reply.text download_image(uri, dest_file_name)
   end
 
