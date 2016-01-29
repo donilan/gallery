@@ -45,7 +45,7 @@ module.exports = React.createClass({
     if (containerWidth >= 1024){
       return {loadSize: 3, containerWidth: containerWidth, maxPhotos: 12, fontSize: '35px'};
     } else if (containerWidth >= 480){
-      return {loadSize: 2, containerWidth: containerWidth, maxPhotos: 6, fontSize: '20px'};
+      return {loadSize: 2, containerWidth: containerWidth, maxPhotos: 8, fontSize: '20px'};
     } else {
       return {loadSize: 1, containerWidth: containerWidth, maxPhotos: 3, fontSize: '14px'};
     }
@@ -64,7 +64,7 @@ module.exports = React.createClass({
     }
   },
   handleScroll: function(e) {
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 120)) {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 300)) {
       this.loadMorePhotos();
     }
   },
