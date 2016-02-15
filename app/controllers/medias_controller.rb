@@ -38,20 +38,20 @@ class MediasController < ApplicationController
 
   def handle_jpg(path)
     name = File.basename path
-    cache_path = media_cache_path.join(name).to_s
-    if !File.exist?(cache_path)
-      image = MiniMagick::Image.open(path)
-      width = image.width
-      while width > THUMB_WIDTH
-        width /= 1.4
-      end
-      image.resize("1000>x#{width}>")
-      image.write(cache_path)
-    end
-    meta = MiniMagick::Image.open(cache_path)
+    # cache_path = media_cache_path.join(name).to_s
+    # if !File.exist?(cache_path)
+    #   image = MiniMagick::Image.open(path)
+    #   width = image.width
+    #   while width > THUMB_WIDTH
+    #     width /= 1.4
+    #   end
+    #   image.resize("1000>x#{width}>")
+    #   image.write(cache_path)
+    # end
+    meta = MiniMagick::Image.open(path)
     {
       type: 'image',
-      src: media_cache_uri(name),
+      src: media_uri(name),
       width: meta.width,
       height: meta.height,
       aspectRatio: (1.0 * meta.width / meta.height).round(2),
