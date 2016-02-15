@@ -2,9 +2,9 @@ class MediasController < ApplicationController
   include MediasHelper
   THUMB_WIDTH = 400
   def index
-    if !File.exist?(media_cache_path)
-      FileUtils.mkdir_p(media_cache_path)
-    end
+    # if !File.exist?(media_cache_path)
+    #   FileUtils.mkdir_p(media_cache_path)
+    # end
     medias = Rails.cache.fetch('medias-controller-index', expires_in: 60.seconds) do
       Dir[media_path.join('*').to_s].sort_by{ |f| File.mtime(f) }.reverse.map do |path|
         handle_name = "handle_#{File.extname(path)[1..-1]}".to_sym

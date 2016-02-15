@@ -39,7 +39,10 @@ module.exports = React.createClass({
   },
   componentWillMount: function() {
     window.addEventListener('scroll', this.handleScroll);
-    this.loop();
+    $.get('/medias', function(images){
+      this.setState({photos: images});
+    }.bind(this));
+    /* this.loop(); */
   },
   calcState: function(containerWidth) {
     if (containerWidth >= 1024){
