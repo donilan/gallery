@@ -7,7 +7,7 @@ class MediasController < ApplicationController
     # end
     medias = Rails.cache.fetch('medias-controller-index', expires_in: 60.seconds) do
       Dir[media_path.join('*').to_s].sort_by{ |f| File.mtime(f) }.reverse.map do |path|
-        handle_name = "handle_#{File.extname(path)[1..-1]}".to_sym
+        handle_name = "handle_#{File.extname(path)[1..-1].downcase}".to_sym
         if methods.include? handle_name
           handle = method handle_name
           handle.call path
